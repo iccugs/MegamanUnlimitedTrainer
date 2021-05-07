@@ -143,6 +143,11 @@ newmem:
 
 code:
   nop
+  nop
+  nop
+  nop
+  nop
+  nop
   jmp return
 
 infHealth+04:
@@ -767,14 +772,14 @@ MMU.exe+1AD787: E8 04 01 E9 FF     - call MMU.exe+3D890
     <CheatEntry>
       <ID>4</ID>
       <Description>"Money (Megaman Only)"</Description>
-      <LastState Value="999" RealAddress="0019FC3C"/>
+      <LastState Value="0" RealAddress="0019FC3C"/>
       <VariableType>4 Bytes</VariableType>
       <Address>0019FC3C</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>3</ID>
       <Description>"Lives (9 is max)"</Description>
-      <LastState Value="9" RealAddress="0019FC44"/>
+      <LastState Value="2" RealAddress="0019FC44"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>0019FC44</Address>
@@ -782,7 +787,7 @@ MMU.exe+1AD787: E8 04 01 E9 FF     - call MMU.exe+3D890
     <CheatEntry>
       <ID>5</ID>
       <Description>"Beat Call (9 is max)"</Description>
-      <LastState Value="9" RealAddress="0019FC24"/>
+      <LastState Value="0" RealAddress="0019FC24"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>0019FC24</Address>
@@ -790,7 +795,7 @@ MMU.exe+1AD787: E8 04 01 E9 FF     - call MMU.exe+3D890
     <CheatEntry>
       <ID>6</ID>
       <Description>"Shock Guard (9 is max)"</Description>
-      <LastState Value="9" RealAddress="0019FC2C"/>
+      <LastState Value="0" RealAddress="0019FC2C"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>0019FC2C</Address>
@@ -806,7 +811,7 @@ MMU.exe+1AD787: E8 04 01 E9 FF     - call MMU.exe+3D890
     <CheatEntry>
       <ID>8</ID>
       <Description>"Energy Tanks (4 is max)"</Description>
-      <LastState Value="4" RealAddress="0019FC34"/>
+      <LastState Value="0" RealAddress="0019FC34"/>
       <VariableType>4 Bytes</VariableType>
       <Address>0019FC34</Address>
     </CheatEntry>
@@ -827,7 +832,7 @@ MMU.exe+1AD787: E8 04 01 E9 FF     - call MMU.exe+3D890
     <CheatEntry>
       <ID>32</ID>
       <Description>"healthActualPointer"</Description>
-      <LastState Value="28" RealAddress="21E45D40"/>
+      <LastState Value="28" RealAddress="092093E8"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>"MMU.exe"+002C55F0</Address>
@@ -839,7 +844,7 @@ MMU.exe+1AD787: E8 04 01 E9 FF     - call MMU.exe+3D890
     <CheatEntry>
       <ID>37</ID>
       <Description>"healthDisplayPointer"</Description>
-      <LastState Value="4294930308" RealAddress="77AE020C"/>
+      <LastState Value="28" RealAddress="0BAFB488"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>"libvorbisfile-3.dll"+0000A018</Address>
@@ -847,26 +852,6 @@ MMU.exe+1AD787: E8 04 01 E9 FF     - call MMU.exe+3D890
         <Offset>58</Offset>
         <Offset>50</Offset>
       </Offsets>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>38</ID>
-      <Description>"ra1"</Description>
-      <LastState Value="0" RealAddress="025C09B0"/>
-      <VariableType>Float</VariableType>
-      <Address>025C09B0</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>39</ID>
-      <Description>"ra2"</Description>
-      <VariableType>Float</VariableType>
-      <Address>00D50B70</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>40</ID>
-      <Description>"ra3"</Description>
-      <LastState Value="26.5" RealAddress="025D0F70"/>
-      <VariableType>Float</VariableType>
-      <Address>025D0F70</Address>
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
