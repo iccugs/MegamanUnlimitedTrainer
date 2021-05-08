@@ -18,7 +18,7 @@ int main()
 	bool bBeat = false, bEddie = false, bEtanks = false, bWtanks = false, bZprot = false;
 
 	const int screwsMax = 999, livesMax = 9, shockMax = 9, beatMax = 9, eddieMax = 9;
-	const int etanksMax = 4, wtanksMax = 4, healthMax = 28;
+	const int etanksMax = 4, wtanksMax = 4, healthMax = 999;
 	const float ammoMax = 28;
 
 	//look for MMU.exe process
@@ -112,6 +112,8 @@ int main()
 
 			if (bHealth)
 			{
+				mem::NopEx((BYTE*)(moduleBase + 0x1B01BA), 6, hProcess);
+				mem::PatchEx((BYTE*)healthAddr, (BYTE*)&healthMax, sizeof(healthMax), hProcess);
 				ClearScreen();
 				AsciiMenu();
 				std::cout << "Infinite Screws = " << bScrews << std::endl;
@@ -127,6 +129,7 @@ int main()
 			}
 			else
 			{
+				mem::PatchEx((BYTE*)(moduleBase + 0x1B01BA), (BYTE*)"\x89\x90\x50\x01\x00\x00", 6, hProcess);
 				ClearScreen();
 				AsciiMenu();
 				std::cout << "Infinite Screws = " << bScrews << std::endl;
@@ -140,12 +143,6 @@ int main()
 				std::cout << "Infinite W-Tanks = " << bWtanks << std::endl;
 				std::cout << "Infinite Z Abilities = " << bZprot << std::endl;
 			}
-		}
-
-		//continuous write to health if infinite health is toggled
-		if (bHealth)
-		{
-			mem::PatchEx((BYTE*)healthAddr, (BYTE*)&healthMax, sizeof(healthMax), hProcess);
 		}
 
 		//infinite ammo toggle
