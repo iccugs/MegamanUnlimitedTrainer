@@ -13,19 +13,25 @@ int main()
 {
 	HANDLE hProcess = 0;
 
-	uintptr_t moduleBase = 0;
+	uintptr_t moduleBase = 0, localPlayerPtr = 0, healthAddr = 0;
 	bool bScrews = false, bHealth = false, bAmmo = false, bLives = false, bShock = false;
 	bool bBeat = false, bEddie = false, bEtanks = false, bWtanks = false, bZprot = false;
 
-	int screwsMax = 999, livesMax = 9, shockMax = 9, beatMax = 9, eddieMax = 9;
-	int etanksMax = 4, wtanksMax = 4;
-
-	DWORD procId = GetProcId(L"MMU.exe");
+	const int screwsMax = 999, livesMax = 9, shockMax = 9, beatMax = 9, eddieMax = 9;
+	const int etanksMax = 4, wtanksMax = 4, healthMax = 28;
+	const float ammoMax = 28;
 
 	//look for MMU.exe process
+	DWORD procId = GetProcId(L"MMU.exe");
+
 	if (procId)
 	{
 		hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, procId);
+
+		//define moduleBase and pointers
+		moduleBase = GetModuleBaseAddress(procId, L"MMU.exe");
+		localPlayerPtr = moduleBase + 0x2C55F0;
+		healthAddr = FindDMAAddy(hProcess, localPlayerPtr, { 0xC,0x150 });
 
 		//set console colors
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -57,9 +63,6 @@ int main()
 
 	while (GetExitCodeProcess(hProcess, &dwExit) && dwExit == STILL_ACTIVE)
 	{
-		//define moduleBase
-		moduleBase = GetModuleBaseAddress(procId, L"MMU.exe");
-
 		//infinite screws toggle
 		if (GetAsyncKeyState(VK_NUMPAD0) & 1)
 		{
@@ -107,7 +110,6 @@ int main()
 
 			if (bHealth)
 			{
-				mem::NopEx((BYTE*)(moduleBase + 0x1B01BA), 6, hProcess);
 				ClearScreen();
 				AsciiMenu();
 				std::cout << "Infinite Screws = " << bScrews << std::endl;
@@ -123,7 +125,6 @@ int main()
 			}
 			else
 			{
-				mem::PatchEx((BYTE*)(moduleBase + 0x1B01BA), (BYTE*)"\x89\x90\x50\x01\x00\x00", 6, hProcess);
 				ClearScreen();
 				AsciiMenu();
 				std::cout << "Infinite Screws = " << bScrews << std::endl;
@@ -137,6 +138,12 @@ int main()
 				std::cout << "Infinite W-Tanks = " << bWtanks << std::endl;
 				std::cout << "Infinite Z Abilities = " << bZprot << std::endl;
 			}
+		}
+
+		//continuous write to health if infinite health is toggled
+		if (bHealth)
+		{
+			mem::PatchEx((BYTE*)healthAddr, (BYTE*)&healthMax, sizeof(healthMax), hProcess);
 		}
 
 		//infinite ammo toggle
