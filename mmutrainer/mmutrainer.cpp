@@ -18,7 +18,7 @@ int main()
 	bool bBeat = false, bEddie = false, bEtanks = false, bWtanks = false, bZprot = false;
 
 	const int screwsMax = 999, livesMax = 9, shockMax = 9, beatMax = 9, eddieMax = 9;
-	const int etanksMax = 4, wtanksMax = 4, healthMax = 999;
+	const int etanksMax = 4, wtanksMax = 4, healthMax = 99;
 	const float ammoMax = 28;
 
 	//look for MMU.exe process
