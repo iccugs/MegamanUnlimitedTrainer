@@ -28,10 +28,8 @@ int main()
 	{
 		hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, procId);
 
-		//define moduleBase and pointers
+		//define moduleBase
 		moduleBase = GetModuleBaseAddress(procId, L"MMU.exe");
-		localPlayerPtr = moduleBase + 0x2C55F0;
-		healthAddr = FindDMAAddy(hProcess, localPlayerPtr, { 0xC,0x150 });
 
 		//set console colors
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -63,6 +61,10 @@ int main()
 
 	while (GetExitCodeProcess(hProcess, &dwExit) && dwExit == STILL_ACTIVE)
 	{
+		//define pointers
+		localPlayerPtr = moduleBase + 0x2C55F0;
+		healthAddr = FindDMAAddy(hProcess, localPlayerPtr, { 0xC,0x150 });
+
 		//infinite screws toggle
 		if (GetAsyncKeyState(VK_NUMPAD0) & 1)
 		{
