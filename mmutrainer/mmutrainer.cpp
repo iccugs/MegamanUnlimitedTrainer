@@ -72,7 +72,6 @@ int main()
 
 			if (bScrews)
 			{
-				mem::PatchEx((BYTE*)0x19FC3C, (BYTE*)&screwsMax, sizeof(screwsMax), hProcess);
 				mem::NopEx((BYTE*)(moduleBase + 0x49A5), 3, hProcess);
 				ClearScreen();
 				AsciiMenu();
@@ -105,6 +104,12 @@ int main()
 			}
 		}
 
+		//continuous write of max screws
+		if (bScrews)
+		{
+			mem::PatchEx((BYTE*)0x19FC3C, (BYTE*)&screwsMax, sizeof(screwsMax), hProcess);
+		}
+
 		//infinite health toggle
 		if (GetAsyncKeyState(VK_NUMPAD1) & 1)
 		{
@@ -113,7 +118,6 @@ int main()
 			if (bHealth)
 			{
 				mem::NopEx((BYTE*)(moduleBase + 0x1B01BA), 6, hProcess);
-				mem::PatchEx((BYTE*)healthAddr, (BYTE*)&healthMax, sizeof(healthMax), hProcess);
 				ClearScreen();
 				AsciiMenu();
 				std::cout << "Infinite Screws = " << bScrews << std::endl;
@@ -143,6 +147,12 @@ int main()
 				std::cout << "Infinite W-Tanks = " << bWtanks << std::endl;
 				std::cout << "Infinite Z Abilities = " << bZprot << std::endl;
 			}
+		}
+
+		//continuous write of max health
+		if (bHealth)
+		{
+			mem::PatchEx((BYTE*)healthAddr, (BYTE*)&healthMax, sizeof(healthMax), hProcess);
 		}
 
 		//infinite ammo toggle
@@ -191,7 +201,6 @@ int main()
 
 			if (bLives)
 			{
-				mem::PatchEx((BYTE*)0x19FC44, (BYTE*)&livesMax, sizeof(livesMax), hProcess);
 				mem::NopEx((BYTE*)(moduleBase + 0x49E5), 3, hProcess);
 				ClearScreen();
 				AsciiMenu();
@@ -224,6 +233,12 @@ int main()
 			}
 		}
 
+		//continuous write of max lives
+		if (bLives)
+		{
+			mem::PatchEx((BYTE*)0x19FC44, (BYTE*)&livesMax, sizeof(livesMax), hProcess);
+		}
+
 		//infinite shock boots toggle
 		if (GetAsyncKeyState(VK_NUMPAD4) & 1)
 		{
@@ -231,7 +246,6 @@ int main()
 
 			if (bShock)
 			{
-				mem::PatchEx((BYTE*)0x19FC2C, (BYTE*)&shockMax, sizeof(shockMax), hProcess);
 				mem::NopEx((BYTE*)(moduleBase + 0x20D25), 3, hProcess);
 				ClearScreen();
 				AsciiMenu();
@@ -264,6 +278,12 @@ int main()
 			}
 		}
 
+		//continuous write to shock boots
+		if (bShock)
+		{
+			mem::PatchEx((BYTE*)0x19FC2C, (BYTE*)&shockMax, sizeof(shockMax), hProcess);
+		}
+
 		//infinite beat toggle
 		if (GetAsyncKeyState(VK_NUMPAD5) & 1)
 		{
@@ -271,7 +291,6 @@ int main()
 
 			if (bBeat)
 			{
-				mem::PatchEx((BYTE*)0x19FC24, (BYTE*)&beatMax, sizeof(beatMax), hProcess);
 				mem::NopEx((BYTE*)(moduleBase + 0x20CE5), 3, hProcess);
 				ClearScreen();
 				AsciiMenu();
@@ -304,6 +323,12 @@ int main()
 			}
 		}
 
+		//continuous write to beat value
+		if (bBeat)
+		{
+			mem::PatchEx((BYTE*)0x19FC24, (BYTE*)&beatMax, sizeof(beatMax), hProcess);
+		}
+
 		//infinite eddie toggle
 		if (GetAsyncKeyState(VK_NUMPAD6) & 1)
 		{
@@ -311,7 +336,6 @@ int main()
 
 			if (bEddie)
 			{
-				mem::PatchEx((BYTE*)0x19FC28, (BYTE*)&eddieMax, sizeof(eddieMax), hProcess);
 				mem::NopEx((BYTE*)(moduleBase + 0x29EE5), 3, hProcess);
 				ClearScreen();
 				AsciiMenu();
@@ -344,6 +368,12 @@ int main()
 			}
 		}
 
+		//continuous write to eddies
+		if (bEddie)
+		{
+			mem::PatchEx((BYTE*)0x19FC28, (BYTE*)&eddieMax, sizeof(eddieMax), hProcess);
+		}
+
 		//infinite e-tanks
 		if (GetAsyncKeyState(VK_NUMPAD7) & 1)
 		{
@@ -351,7 +381,6 @@ int main()
 
 			if (bEtanks)
 			{
-				mem::PatchEx((BYTE*)0x19FC34, (BYTE*)&etanksMax, sizeof(etanksMax), hProcess);
 				mem::NopEx((BYTE*)(moduleBase + 0x330E5), 3, hProcess);
 				ClearScreen();
 				AsciiMenu();
@@ -384,6 +413,12 @@ int main()
 			}
 		}
 
+		//continuous write to etanks
+		if (bEtanks)
+		{
+			mem::PatchEx((BYTE*)0x19FC34, (BYTE*)&etanksMax, sizeof(etanksMax), hProcess);
+		}
+
 		//infinite w-tanks
 		if (GetAsyncKeyState(VK_NUMPAD8) & 1)
 		{
@@ -391,7 +426,6 @@ int main()
 
 			if (bWtanks)
 			{
-				mem::PatchEx((BYTE*)0x19FC38, (BYTE*)&wtanksMax, sizeof(wtanksMax), hProcess);
 				mem::NopEx((BYTE*)(moduleBase + 0x4965), 3, hProcess);
 				ClearScreen();
 				AsciiMenu();
@@ -422,6 +456,12 @@ int main()
 				std::cout << "Infinite W-Tanks = " << bWtanks << std::endl;
 				std::cout << "Infinite Z Abilities = " << bZprot << std::endl;
 			}
+		}
+
+		//continuous write to wtanks
+		if (bWtanks)
+		{
+			mem::PatchEx((BYTE*)0x19FC38, (BYTE*)&wtanksMax, sizeof(wtanksMax), hProcess);
 		}
 
 		//infinite z abilities
