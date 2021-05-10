@@ -31,24 +31,6 @@ void AsciiArt()
 	std::cout << "press enter to continue..." << std::endl;
 }
 
-void AsciiMenu()
-{
-	std::cout << "TOGGLE FUNCTIONS:" << std::endl;
-	std::cout << "NUM0 = Infinite Screws" << std::endl;
-	std::cout << "NUM1 = Infinite Health" << std::endl;
-	std::cout << "NUM2 = Infinite Ammo" << std::endl;
-	std::cout << "NUM3 = Infinite Lives" << std::endl;
-	std::cout << "NUM4 = Infinite Shock Boots" << std::endl;
-	std::cout << "NUM5 = Infinite Beat Call" << std::endl;
-	std::cout << "NUM6 = Infinite Eddie" << std::endl;
-	std::cout << "NUM7 = Infinite E-Tanks" << std::endl;
-	std::cout << "NUM8 = Infinite W-Tanks" << std::endl;
-	std::cout << "NUM9 = Infinite Z Abilities" << std::endl;
-	std::cout << "Press INSERT to exit the trainer" << std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "Hack Status:" << std::endl;
-}
-
 void ClearScreen()
 {
 	HANDLE hStdOut;

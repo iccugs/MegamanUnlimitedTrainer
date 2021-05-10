@@ -5,6 +5,6 @@
 
 void AsciiArt();
 
-void AsciiMenu();
+void Menu();
 
 void ClearScreen();
