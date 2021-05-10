@@ -1,4 +1,3 @@
-// Megaman Unlimited Trainer
 #include"stdafx.h"
 #include<iostream>
 #include<vector>
@@ -27,6 +26,8 @@ void Menu()
 int main()
 {
 	HANDLE hProcess=0;
+	HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole,9);
 	uintptr_t moduleBase=0,localPlayerPtr=0,healthAddr=0;
 	const int screwsMax=999,livesMax=9,shockMax=9,beatMax=9,eddieMax=9;
 	const int etanksMax=4,wtanksMax=4,healthMax=99;
@@ -36,8 +37,6 @@ int main()
 	{
 		hProcess=OpenProcess(PROCESS_ALL_ACCESS,NULL,procId);
 		moduleBase=GetModuleBaseAddress(procId,L"MMU.exe");
-		HANDLE hConsole=GetStdHandle(STD_OUTPUT_HANDLE);
-		SetConsoleTextAttribute(hConsole, 9);
 		AsciiArt();
 		getchar();
 		ClearScreen();
