@@ -2,39 +2,39 @@
 <CheatTable CheatEngineTableVersion="34">
   <CheatEntries>
     <CheatEntry>
-      <ID>21</ID>
-      <Description>"Infinite Money (Megaman Only)"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infMoney,MMU.exe,89 48 24 8B E5 5D C2 04 00 CC CC 55 8B EC 51 89 4D FC 8B 45 FC 8B 48 64)
-alloc(newmem,$1000)
+      <ID>33</ID>
+      <Description>"Screws"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"Lock Screw Value (Megaman Only)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that change screw value.
+}
 
-label(code)
-label(return)
+[ENABLE]
+define(lockScrews,MMU.exe+49A5)
+assert(lockScrews,89 48 24)
+registersymbol(lockScrews)
 
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  mov esp,ebp
-  jmp return
-
-infMoney:
-  jmp newmem
-return:
-registersymbol(infMoney)
+lockScrews:
+  db 90 90 90 // nop nop nop
 
 [DISABLE]
+lockScrews:
+  db 89 48 24 // mov [eax+24],ecx
 
-infMoney:
-  db 89 48 24 8B E5
+unregistersymbol(lockScrews)
 
-unregistersymbol(infMoney)
-dealloc(newmem)
-
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+49A5
 
@@ -63,107 +63,50 @@ MMU.exe+49B4: 89 4D FC        - mov [ebp-04],ecx
 MMU.exe+49B7: 8B 45 FC        - mov eax,[ebp-04]
 }
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"Screws (Megaman Only)"</Description>
+          <LastState Value="999" RealAddress="0019FC3C"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>0019FC3C</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>15</ID>
-      <Description>"Infinite Lives"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infLives,MMU.exe,89 48 2C 8B E5 5D C2 04 00 CC CC 55 8B EC 51 89 4D FC 8B 45 FC 8B 48 64)
-alloc(newmem,$1000)
-
-label(code)
-label(return)
-
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  mov esp,ebp
-  jmp return
-
-infLives:
-  jmp newmem
-return:
-registersymbol(infLives)
-
-[DISABLE]
-
-infLives:
-  db 89 48 2C 8B E5
-
-unregistersymbol(infLives)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: MMU.exe+49E5
-
-MMU.exe+49CE: CC              - int 3 
-MMU.exe+49CF: CC              - int 3 
-MMU.exe+49D0: 55              - push ebp
-MMU.exe+49D1: 8B EC           - mov ebp,esp
-MMU.exe+49D3: 51              - push ecx
-MMU.exe+49D4: 89 4D FC        - mov [ebp-04],ecx
-MMU.exe+49D7: 8B 4D FC        - mov ecx,[ebp-04]
-MMU.exe+49DA: E8 D1 FF FF FF  - call MMU.exe+49B0
-MMU.exe+49DF: 8B 45 FC        - mov eax,[ebp-04]
-MMU.exe+49E2: 8B 4D 08        - mov ecx,[ebp+08]
-// ---------- INJECTING HERE ----------
-MMU.exe+49E5: 89 48 2C        - mov [eax+2C],ecx
-// ---------- DONE INJECTING  ----------
-MMU.exe+49E8: 8B E5           - mov esp,ebp
-MMU.exe+49EA: 5D              - pop ebp
-MMU.exe+49EB: C2 04 00        - ret 0004
-MMU.exe+49EE: CC              - int 3 
-MMU.exe+49EF: CC              - int 3 
-MMU.exe+49F0: 55              - push ebp
-MMU.exe+49F1: 8B EC           - mov ebp,esp
-MMU.exe+49F3: 51              - push ecx
-MMU.exe+49F4: 89 4D FC        - mov [ebp-04],ecx
-MMU.exe+49F7: 8B 45 FC        - mov eax,[ebp-04]
+      <ID>34</ID>
+      <Description>"Health"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"Lock Health"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that change health value.
 }
-</AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>2</ID>
-      <Description>"Infinite Health"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infHealth,MMU.exe,08 8B 45 FC 89 90 50 01 00 00)
-alloc(newmem,$1000)
 
-label(code)
-label(return)
+[ENABLE]
+define(lockHealth,MMU.exe+1B01BA)
+assert(lockHealth,89 90 50 01 00 00)
+registersymbol(lockHealth)
 
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-  jmp return
-
-infHealth+04:
-  jmp newmem
-  nop
-return:
-registersymbol(infHealth)
+lockHealth:
+  db 90 90 90 90 90 90 // nop nop nop nop nop nop
 
 [DISABLE]
+lockHealth:
+  db 89 90 50 01 00 00 // mov [eax+00000150],edx
 
-infHealth+04:
-  db 89 90 50 01 00 00
+unregistersymbol(lockHealth)
 
-unregistersymbol(infHealth)
-dealloc(newmem)
-
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+1B01BA
 
@@ -192,41 +135,55 @@ MMU.exe+1B01DE: 8B E5              - mov esp,ebp
 MMU.exe+1B01E0: 5D                 - pop ebp
 }
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>32</ID>
+          <Description>"Health Value (28 is max)"</Description>
+          <LastState Value="28" RealAddress="0E68F520"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"MMU.exe"+002C55F0</Address>
+          <Offsets>
+            <Offset>150</Offset>
+            <Offset>C</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>14</ID>
-      <Description>"Infinite Weapon"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infWeapon,MMU.exe,D9 18 8B E5 5D C2 08)
-alloc(newmem,$1000)
+      <ID>36</ID>
+      <Description>"Ammo"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"Lock Ammo Value"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that change ammo value.
+}
 
-label(code)
-label(return)
+[ENABLE]
+define(lockAmmo,MMU.exe+20ECC)
+assert(lockAmmo,D9 18)
+registersymbol(lockAmmo)
 
-newmem:
-
-code:
-  nop
-  nop
-  mov esp,ebp
-  pop ebp
-  jmp return
-
-infWeapon:
-  jmp newmem
-return:
-registersymbol(infWeapon)
+lockAmmo:
+  db 90 90 // nop nop
 
 [DISABLE]
+lockAmmo:
+  db D9 18 // fstp dword ptr [eax]
 
-infWeapon:
-  db D9 18 8B E5 5D
+unregistersymbol(lockAmmo)
 
-unregistersymbol(infWeapon)
-dealloc(newmem)
-
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+20ECC
 
@@ -255,76 +212,103 @@ MMU.exe+20ED9: CC                 - int 3
 MMU.exe+20EDA: CC                 - int 3 
 }
 </AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>16</ID>
-      <Description>"Infinite Beat Call"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infBeat,MMU.exe,89 48 0C 8B E5 5D C2 04 00 CC CC 55 8B EC 51 89 4D FC 8B 45 FC 8B 48 64)
-alloc(newmem,$1000)
+      <ID>35</ID>
+      <Description>"Lives"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"Lock Lives Value"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that change lives value.
+}
 
-label(code)
-label(return)
+[ENABLE]
+define(lockLives,MMU.exe+49E5)
+assert(lockLives,89 48 2C)
+registersymbol(lockLives)
 
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  mov esp,ebp
-  jmp return
-
-infBeat:
-  jmp newmem
-return:
-registersymbol(infBeat)
+lockLives:
+  db 90 90 90 // nop nop nop
 
 [DISABLE]
+lockLives:
+  db 89 48 2C // mov [eax+2C],ecx
 
-infBeat:
-  db 89 48 0C 8B E5
+unregistersymbol(lockLives)
 
-unregistersymbol(infBeat)
-dealloc(newmem)
-
+//Release
 {
-// ORIGINAL CODE - INJECTION POINT: MMU.exe+20CE5
+// ORIGINAL CODE - INJECTION POINT: MMU.exe+49E5
 
-MMU.exe+20CCE: CC              - int 3 
-MMU.exe+20CCF: CC              - int 3 
-MMU.exe+20CD0: 55              - push ebp
-MMU.exe+20CD1: 8B EC           - mov ebp,esp
-MMU.exe+20CD3: 51              - push ecx
-MMU.exe+20CD4: 89 4D FC        - mov [ebp-04],ecx
-MMU.exe+20CD7: 8B 4D FC        - mov ecx,[ebp-04]
-MMU.exe+20CDA: E8 D1 FF FF FF  - call MMU.exe+20CB0
-MMU.exe+20CDF: 8B 45 FC        - mov eax,[ebp-04]
-MMU.exe+20CE2: 8B 4D 08        - mov ecx,[ebp+08]
+MMU.exe+49CE: CC              - int 3 
+MMU.exe+49CF: CC              - int 3 
+MMU.exe+49D0: 55              - push ebp
+MMU.exe+49D1: 8B EC           - mov ebp,esp
+MMU.exe+49D3: 51              - push ecx
+MMU.exe+49D4: 89 4D FC        - mov [ebp-04],ecx
+MMU.exe+49D7: 8B 4D FC        - mov ecx,[ebp-04]
+MMU.exe+49DA: E8 D1 FF FF FF  - call MMU.exe+49B0
+MMU.exe+49DF: 8B 45 FC        - mov eax,[ebp-04]
+MMU.exe+49E2: 8B 4D 08        - mov ecx,[ebp+08]
 // ---------- INJECTING HERE ----------
-MMU.exe+20CE5: 89 48 0C        - mov [eax+0C],ecx
+MMU.exe+49E5: 89 48 2C        - mov [eax+2C],ecx
 // ---------- DONE INJECTING  ----------
-MMU.exe+20CE8: 8B E5           - mov esp,ebp
-MMU.exe+20CEA: 5D              - pop ebp
-MMU.exe+20CEB: C2 04 00        - ret 0004
-MMU.exe+20CEE: CC              - int 3 
-MMU.exe+20CEF: CC              - int 3 
-MMU.exe+20CF0: 55              - push ebp
-MMU.exe+20CF1: 8B EC           - mov ebp,esp
-MMU.exe+20CF3: 51              - push ecx
-MMU.exe+20CF4: 89 4D FC        - mov [ebp-04],ecx
-MMU.exe+20CF7: 8B 45 FC        - mov eax,[ebp-04]
+MMU.exe+49E8: 8B E5           - mov esp,ebp
+MMU.exe+49EA: 5D              - pop ebp
+MMU.exe+49EB: C2 04 00        - ret 0004
+MMU.exe+49EE: CC              - int 3 
+MMU.exe+49EF: CC              - int 3 
+MMU.exe+49F0: 55              - push ebp
+MMU.exe+49F1: 8B EC           - mov ebp,esp
+MMU.exe+49F3: 51              - push ecx
+MMU.exe+49F4: 89 4D FC        - mov [ebp-04],ecx
+MMU.exe+49F7: 8B 45 FC        - mov eax,[ebp-04]
 }
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"Lives (9 is max)"</Description>
+          <LastState Value="9" RealAddress="0019FC44"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>0019FC44</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>17</ID>
-      <Description>"Infinite Shock Guard"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
+      <ID>37</ID>
+      <Description>"Shock Guard"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"Lock Shock Guard Value"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+
+  Nops out instructions that changes shock guard count.
+}
+
+[ENABLE]
 aobscanmodule(infShock,MMU.exe,89 48 14 8B E5 5D C2 04 00 CC CC 55 8B EC 51 89 4D FC 8B 4D FC 81)
 alloc(newmem,$1000)
 
@@ -381,41 +365,124 @@ MMU.exe+20D34: 89 4D FC        - mov [ebp-04],ecx
 MMU.exe+20D37: 8B 4D FC        - mov ecx,[ebp-04]
 }
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"Shock Guard (9 is max)"</Description>
+          <LastState Value="9" RealAddress="0019FC2C"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>0019FC2C</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>18</ID>
-      <Description>"Infinite Eddie Call"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infEddie,MMU.exe,89 48 10 8B E5 5D C2 04 00 CC CC 55 8B EC 51 89 4D FC 8B 4D)
-alloc(newmem,$1000)
+      <ID>38</ID>
+      <Description>"Beat Call"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"Lock Beat Call Value"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that change Beat call value.
+}
 
-label(code)
-label(return)
+[ENABLE]
+define(lockBeat,MMU.exe+20CE5)
+assert(lockBeat,89 48 0C)
+registersymbol(lockBeat)
 
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  mov esp,ebp
-  jmp return
-
-infEddie:
-  jmp newmem
-return:
-registersymbol(infEddie)
+lockBeat:
+  db 90 90 90 // nop nop nop
 
 [DISABLE]
+lockBeat:
+  db 89 48 0C // mov [eax+0C],ecx
 
-infEddie:
-  db 89 48 10 8B E5
+unregistersymbol(lockBeat)
 
-unregistersymbol(infEddie)
-dealloc(newmem)
+//Release
+{
+// ORIGINAL CODE - INJECTION POINT: MMU.exe+20CE5
 
+MMU.exe+20CCE: CC              - int 3 
+MMU.exe+20CCF: CC              - int 3 
+MMU.exe+20CD0: 55              - push ebp
+MMU.exe+20CD1: 8B EC           - mov ebp,esp
+MMU.exe+20CD3: 51              - push ecx
+MMU.exe+20CD4: 89 4D FC        - mov [ebp-04],ecx
+MMU.exe+20CD7: 8B 4D FC        - mov ecx,[ebp-04]
+MMU.exe+20CDA: E8 D1 FF FF FF  - call MMU.exe+20CB0
+MMU.exe+20CDF: 8B 45 FC        - mov eax,[ebp-04]
+MMU.exe+20CE2: 8B 4D 08        - mov ecx,[ebp+08]
+// ---------- INJECTING HERE ----------
+MMU.exe+20CE5: 89 48 0C        - mov [eax+0C],ecx
+// ---------- DONE INJECTING  ----------
+MMU.exe+20CE8: 8B E5           - mov esp,ebp
+MMU.exe+20CEA: 5D              - pop ebp
+MMU.exe+20CEB: C2 04 00        - ret 0004
+MMU.exe+20CEE: CC              - int 3 
+MMU.exe+20CEF: CC              - int 3 
+MMU.exe+20CF0: 55              - push ebp
+MMU.exe+20CF1: 8B EC           - mov ebp,esp
+MMU.exe+20CF3: 51              - push ecx
+MMU.exe+20CF4: 89 4D FC        - mov [ebp-04],ecx
+MMU.exe+20CF7: 8B 45 FC        - mov eax,[ebp-04]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"Beat Call (9 is max)"</Description>
+          <LastState Value="9" RealAddress="0019FC24"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>0019FC24</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>39</ID>
+      <Description>"Eddie"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"Lock Eddie Call Value"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that change Eddie call value.
+}
+
+[ENABLE]
+define(lockEddie,MMU.exe+29EE5)
+assert(lockEddie,89 48 10)
+registersymbol(lockEddie)
+
+lockEddie:
+  db 90 90 90 // nop nop nop
+
+[DISABLE]
+lockEddie:
+  db 89 48 10 // mov [eax+10],ecx
+
+unregistersymbol(lockEddie)
+
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+29EE5
 
@@ -444,41 +511,51 @@ MMU.exe+29EF4: 89 4D FC        - mov [ebp-04],ecx
 MMU.exe+29EF7: 8B 4D FC        - mov ecx,[ebp-04]
 }
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"Eddie Call (9 is max)"</Description>
+          <LastState Value="9" RealAddress="0019FC28"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>0019FC28</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>19</ID>
-      <Description>"Infinite Energy Tanks"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infEtank,MMU.exe,89 48 1C 8B E5 5D C2 04 00 CC CC 55 8B EC 51 89 4D FC 8B 4D FC 81)
-alloc(newmem,$1000)
+      <ID>40</ID>
+      <Description>"E-Tanks"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"Lock E-Tank Value"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that change E-Tank value.
+}
 
-label(code)
-label(return)
+[ENABLE]
+define(lockEtank,MMU.exe+330E5)
+assert(lockEtank,89 48 1C)
+registersymbol(lockEtank)
 
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  mov esp,ebp
-  jmp return
-
-infEtank:
-  jmp newmem
-return:
-registersymbol(infEtank)
+lockEtank:
+  db 90 90 90 // nop nop nop
 
 [DISABLE]
+lockEtank:
+  db 89 48 1C // mov [eax+1C],ecx
 
-infEtank:
-  db 89 48 1C 8B E5
+unregistersymbol(lockEtank)
 
-unregistersymbol(infEtank)
-dealloc(newmem)
-
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+330E5
 
@@ -507,41 +584,50 @@ MMU.exe+330F4: 89 4D FC        - mov [ebp-04],ecx
 MMU.exe+330F7: 8B 4D FC        - mov ecx,[ebp-04]
 }
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"E-Tanks (4 is max)"</Description>
+          <LastState Value="4" RealAddress="0019FC34"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>0019FC34</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>20</ID>
-      <Description>"Infinite Weapon Tanks"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infWtank,MMU.exe,05 00 8B 45 FC 8B 4D 08 89 48 20 8B E5)
-alloc(newmem,$1000)
+      <ID>41</ID>
+      <Description>"W-Tanks"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"Lock  W-Tank Value"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that change W-Tank value.
+}
 
-label(code)
-label(return)
+[ENABLE]
+define(lockWtank,MMU.exe+4965)
+assert(lockWtank,89 48 20)
+registersymbol(lockWtank)
 
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  mov esp,ebp
-  jmp return
-
-infWtank+08:
-  jmp newmem
-return:
-registersymbol(infWtank)
+lockWtank:
+  db 90 90 90 // nop nop nop
 
 [DISABLE]
+lockWtank:
+  db 89 48 20 // mov [eax+20],ecx
 
-infWtank+08:
-  db 89 48 20 8B E5
+unregistersymbol(lockWtank)
 
-unregistersymbol(infWtank)
-dealloc(newmem)
-
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+4965
 
@@ -570,44 +656,51 @@ MMU.exe+4974: 89 4D FC        - mov [ebp-04],ecx
 MMU.exe+4977: 8B 45 FC        - mov eax,[ebp-04]
 }
 </AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"Weapon Tanks (4 is max)"</Description>
+          <LastState Value="4" RealAddress="0019FC38"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>0019FC38</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
-      <ID>25</ID>
-      <Description>"Infinite Z Slash/Saber/Shoryuken/Smash"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infZslash,MMU.exe,89 81 50 01 00 00 8B 55 F8)
-alloc(newmem,$1000)
+      <ID>42</ID>
+      <Description>"Z-Prototype"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"Infinite Z Slash/Saber/Shoryuken/Messenkou"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that deplete Z-Prototype's health
+               when he uses Z-slash, Z-saber, shoryuken, and messenkou.
+}
 
-label(code)
-label(return)
-
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-  jmp return
-
-infZslash:
-  jmp newmem
-  nop
-return:
+[ENABLE]
+define(infZslash,MMU.exe+1AD1D7)
+assert(infZslash,89 81 50 01 00 00)
 registersymbol(infZslash)
 
-[DISABLE]
-
 infZslash:
-  db 89 81 50 01 00 00
+  db 90 90 90 90 90 90 // nop nop nop nop nop nop
+
+[DISABLE]
+inZslash:
+  db 89 81 50 01 00 00 // mov [ecx+00000150],eax
 
 unregistersymbol(infZslash)
-dealloc(newmem)
 
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+1AD1D7
 
@@ -636,44 +729,35 @@ MMU.exe+1AD1FC: 0F B6 91 DC 03 00 00  - movzx edx,byte ptr [ecx+000003DC]
 MMU.exe+1AD203: 85 D2                 - test edx,edx
 }
 </AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>26</ID>
-      <Description>"Infinite Z Dash"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infZdash,MMU.exe,89 81 50 01 00 00 8B 55 F4)
-alloc(newmem,$1000)
+        </CheatEntry>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"Infinite Z Dash"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that deplete Z-Prototype's health
+               when he uses Z-Dash.
+}
 
-label(code)
-label(return)
-
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-  jmp return
-
-infZdash:
-  jmp newmem
-  nop
-return:
+[ENABLE]
+define(infZdash,MMU.exe+1AB834)
+assert(infZdash,89 81 50 01 00 00)
 registersymbol(infZdash)
 
-[DISABLE]
-
 infZdash:
-  db 89 81 50 01 00 00
+  db 90 90 90 90 90 90 // nop nop nop nop nop nop
+
+[DISABLE]
+infZdash:
+  db 89 81 50 01 00 00 // mov [ecx+00000150],eax
 
 unregistersymbol(infZdash)
-dealloc(newmem)
 
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+1AB834
 
@@ -702,44 +786,35 @@ MMU.exe+1AB859: 0F B6 91 DC 03 00 00  - movzx edx,byte ptr [ecx+000003DC]
 MMU.exe+1AB860: 85 D2                 - test edx,edx
 }
 </AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>27</ID>
-      <Description>"Infinite Z Board Slash"</Description>
-      <LastState/>
-      <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
-aobscanmodule(infZboard,MMU.exe,89 8A 50 01 00 00)
-alloc(newmem,$1000)
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"Infinite Z Jet Board Slash"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Megaman Unlimited
+  Version: 1.3.1
+  Date   : 2021-05-20
+  Author : Paradox
+  Description: Nops out instructions that deplete Z-Prototype's health
+               when he uses Z-Slash while using his jet board.
+}
 
-label(code)
-label(return)
-
-newmem:
-
-code:
-  nop
-  nop
-  nop
-  nop
-  nop
-  nop
-  jmp return
-
-infZboard:
-  jmp newmem
-  nop
-return:
+[ENABLE]
+define(infZboard,MMU.exe+1AD75D)
+assert(infZboard,89 8A 50 01 00 00)
 registersymbol(infZboard)
 
-[DISABLE]
-
 infZboard:
-  db 89 8A 50 01 00 00
+  db 90 90 90 90 90 90 // nop nop nop nop nop nop
+
+[DISABLE]
+infZboard:
+  db 89 8A 50 01 00 00 // mov [edx+00000150],ecx
 
 unregistersymbol(infZboard)
-dealloc(newmem)
 
+//Release
 {
 // ORIGINAL CODE - INJECTION POINT: MMU.exe+1AD75D
 
@@ -768,69 +843,15 @@ MMU.exe+1AD784: 8B 4D F8           - mov ecx,[ebp-08]
 MMU.exe+1AD787: E8 04 01 E9 FF     - call MMU.exe+3D890
 }
 </AssemblerScript>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>4</ID>
-      <Description>"Money (Megaman Only)"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0019FC3C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>3</ID>
-      <Description>"Lives (9 is max)"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0019FC44</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>5</ID>
-      <Description>"Beat Call (9 is max)"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0019FC24</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>6</ID>
-      <Description>"Shock Guard (9 is max)"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0019FC2C</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>7</ID>
-      <Description>"Eddie Call (9 is max)"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0019FC28</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>8</ID>
-      <Description>"Energy Tanks (4 is max)"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0019FC34</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>9</ID>
-      <Description>"Weapon Tanks (4 is max)"</Description>
-      <VariableType>4 Bytes</VariableType>
-      <Address>0019FC38</Address>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
     <CheatEntry>
       <ID>22</ID>
       <Description>"Energy Balancer (Megaman Only)(1 is max)"</Description>
+      <LastState Value="1" RealAddress="0019FC30"/>
       <VariableType>4 Bytes</VariableType>
       <Address>0019FC30</Address>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>32</ID>
-      <Description>"healthActualPointer"</Description>
-      <ShowAsSigned>0</ShowAsSigned>
-      <VariableType>4 Bytes</VariableType>
-      <Address>"MMU.exe"+002C55F0</Address>
-      <Offsets>
-        <Offset>150</Offset>
-        <Offset>C</Offset>
-      </Offsets>
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
