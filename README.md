@@ -4,7 +4,7 @@ Trainer for Megaman Unlimited version 1.3.1
 
 ## Credits
 
-This project was built using tutorials and code examples from [**GuidedHacking.com**](https://guidedhacking.com). All credit for the original memory manipulation, process injection, and core trainer functionality goes to the GuidedHacking community and their educational resources. This project simply builds upon their foundational work and adapts it for the Castlevania Dominus Collection.
+This project was built using tutorials and code examples from [**GuidedHacking.com**](https://guidedhacking.com). All credit for the original memory manipulation, process injection, and core trainer functionality goes to the GuidedHacking community and their educational resources. This project simply builds upon their foundational work and adapts it for Megaman Unlimited.
 
 Special thanks to [GuidedHacking.com](https://guidedhacking.com) for their comprehensive game hacking tutorials and code examples.
 
